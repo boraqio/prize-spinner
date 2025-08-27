@@ -1,4 +1,7 @@
-// Prize logic and configuration
+// Professional prize logic with Lucide React icons
+import { Key, DollarSign, Percent, Gift, Globe, FileText, Gem } from 'lucide-react';
+
+// Prize configuration with professional icons
 export const PRIZES = [
   {
     id: 1,
@@ -6,7 +9,8 @@ export const PRIZES = [
     description: "Get a premium Boraq keyring!",
     probability: 14, // 14%
     color: "#FF6B6B",
-    icon: "🔑",
+    icon: "K", // Will be rendered as Key icon
+    iconComponent: Key,
     value: "low"
   },
   {
@@ -15,7 +19,8 @@ export const PRIZES = [
     description: "Double keyring win - Get 2 premium keyrings!",
     probability: 14, // 14%
     color: "#4ECDC4",
-    icon: "🔑🔑",
+    icon: "2K", // Will show as double key icon
+    iconComponent: Key,
     value: "low"
   },
   {
@@ -24,7 +29,8 @@ export const PRIZES = [
     description: "20% discount on any Boraq service!",
     probability: 18, // 18%
     color: "#45B7D1",
-    icon: "💰",
+    icon: "20%", // Will be rendered as Percent icon
+    iconComponent: Percent,
     value: "medium"
   },
   {
@@ -33,7 +39,8 @@ export const PRIZES = [
     description: "HUGE WIN! 50% off any Boraq service!",
     probability: 10, // 10%
     color: "#F39C12",
-    icon: "🎉",
+    icon: "50%", // Will be rendered as Gift icon for big win
+    iconComponent: Gift,
     value: "high"
   },
   {
@@ -42,7 +49,8 @@ export const PRIZES = [
     description: "৳2000 OFF on Web & App OR UI & Branding services",
     probability: 14, // 14%
     color: "#9B59B6",
-    icon: "💎",
+    icon: "৳2K", // Will be rendered as Gem icon
+    iconComponent: Gem,
     value: "high"
   },
   {
@@ -51,7 +59,8 @@ export const PRIZES = [
     description: "Complete free 1-page landing website!",
     probability: 10, // 10%
     color: "#E74C3C",
-    icon: "🌐",
+    icon: "WEB", // Will be rendered as Globe icon
+    iconComponent: Globe,
     value: "premium"
   },
   {
@@ -60,7 +69,8 @@ export const PRIZES = [
     description: "Better luck next time! Take our brochure.",
     probability: 20, // 20%
     color: "#95A5A6",
-    icon: "📋",
+    icon: "INFO", // Will be rendered as FileText icon
+    iconComponent: FileText,
     value: "none"
   }
 ];

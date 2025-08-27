@@ -1,6 +1,7 @@
 // Firebase configuration and initialization
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { getFirestore, collection, addDoc, query, where, getDocs, orderBy, limit } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -8,12 +9,19 @@ const firebaseConfig = {
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
+
+// Validate configuration before initializing
+if (!firebaseConfig.apiKey || !firebaseConfig.authDomain || !firebaseConfig.projectId) {
+  throw new Error('Firebase configuration is incomplete');
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore(app);
 
 // Google Auth Provider
 const googleProvider = new GoogleAuthProvider();
@@ -35,7 +43,6 @@ export const signInWithGoogle = async () => {
       }
     };
   } catch (error) {
-    console.error('Google sign-in error:', error);
     return {
       success: false,
       error: error.message
@@ -48,9 +55,49 @@ export const signOutUser = async () => {
     await signOut(auth);
     return { success: true };
   } catch (error) {
-    console.error('Sign out error:', error);
     return { success: false, error: error.message };
   }
 };
 
-export default app;
+// Firestore functions
+export const addDataToCollection = async (collectionName, data) => {
+  try {
+    const docRef = await addDoc(collection(db, collectionName), data);
+    return {
+      success: true,
+      id: docRef.id
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+};
+
+export const getDataFromCollection = async (collectionName, conditions = []) => {
+  try {
+    let q = query(collection(db, collectionName));
+
+    // Apply conditions if provided
+    conditions.forEach(condition => {
+      q = query(q, where(condition.field, condition.operator, condition.value));
+    });
+
+    const querySnapshot = await getDocs(q);
+    const data = [];
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, ...doc.data() });
+    });
+
+    return {
+      success: true,
+      data
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+};

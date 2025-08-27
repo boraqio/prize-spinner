@@ -1,3 +1,348 @@
+/* Enhanced CSS following Boraq Brand Guidelines */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Boraq Brand Color Variables */
+:root {
+  --boraq-soft-green: #DEFFEE;
+  --boraq-mint-green: #6EE7B7;
+  --boraq-dark-green: #059669;
+  --boraq-deep-green: #047857;
+  --boraq-charcoal-gray: #424242;
+  --boraq-black: #1C1C1E;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--boraq-black) 0%, var(--boraq-charcoal-gray) 25%, var(--boraq-deep-green) 50%, var(--boraq-black) 75%, var(--boraq-charcoal-gray) 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color: white;
+}
+
+/* Boraq Brand Text Colors - All White for Dark Background */
+.text-boraq-primary {
+  color: white;
+}
+
+.text-boraq-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.text-boraq-gray {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.text-boraq-mint {
+  color: var(--boraq-mint-green);
+}
+
+/* Global text color override */
+h1, h2, h3, h4, h5, h6, p, span, div, button {
+  color: white;
+}
+
+/* Boraq Brand Background Colors */
+.bg-boraq-light {
+  background-color: var(--boraq-soft-green);
+}
+
+.bg-boraq-mint {
+  background-color: var(--boraq-mint-green);
+}
+
+.bg-boraq-primary {
+  background-color: var(--boraq-dark-green);
+}
+
+/* Glass morphism base styles with Boraq branding */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(110, 231, 183, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow:
+    0 8px 32px rgba(5, 150, 105, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(110, 231, 183, 0.2);
+  border-radius: 15px;
+  box-shadow:
+    0 4px 16px rgba(5, 150, 105, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Boraq Brand Button Styles */
+.glass-button, .boraq-button {
+  background: linear-gradient(135deg, rgba(110, 231, 183, 0.2), rgba(5, 150, 105, 0.1));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(110, 231, 183, 0.3);
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 4px 16px rgba(5, 150, 105, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-button:hover:not(:disabled), .boraq-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(110, 231, 183, 0.3), rgba(5, 150, 105, 0.15));
+  border-color: rgba(110, 231, 183, 0.4);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 24px rgba(5, 150, 105, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-button:active:not(:disabled), .boraq-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow:
+    0 4px 12px rgba(5, 150, 105, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-button::before, .boraq-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(110, 231, 183, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.glass-button:hover::before, .boraq-button:hover::before {
+  left: 100%;
+}
+
+/* Typography following Boraq Brand Guidelines */
+h1, h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h3, h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: white;
+}
+
+p, span {
+  font-family: 'Poppins', sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.caption-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Wheel spinning animation */
+@keyframes spin-wheel {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(var(--final-rotation));
+  }
+}
+
+.animate-spin-wheel {
+  animation: spin-wheel 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Pulse animation for loading states */
+@keyframes pulse-boraq {
+  0%, 100% {
+    background: rgba(222, 255, 238, 0.15);
+    border-color: rgba(110, 231, 183, 0.3);
+  }
+  50% {
+    background: rgba(110, 231, 183, 0.2);
+    border-color: rgba(5, 150, 105, 0.4);
+  }
+}
+
+.animate-pulse-glass {
+  animation: pulse-boraq 2s ease-in-out infinite;
+}
+
+/* Modern floating animation */
+@keyframes float-boraq {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float-boraq 6s ease-in-out infinite;
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 640px) {
+  .glass-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .glass-container {
+    border-radius: 12px;
+  }
+
+  .glass-button, .boraq-button {
+    border-radius: 10px;
+  }
+}
+
+/* Ensure no horizontal scrolling */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar with Boraq branding */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(222, 255, 238, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(110, 231, 183, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(5, 150, 105, 0.7);
+}
+
+/* Focus states for accessibility */
+.glass-button:focus-visible, .boraq-button:focus-visible {
+  outline: 2px solid var(--boraq-mint-green);
+  outline-offset: 2px;
+}
+
+/* Loading spinner enhancement */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile optimization - prevent zoom on inputs */
+input, select, textarea {
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px;
+  }
+}
+
+/* Enhanced glass effects with Boraq branding */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(110, 231, 183, 0.5), transparent);
+  opacity: 0.8;
+}
+
+.glass-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(110, 231, 183, 0.4), transparent);
+  opacity: 0.6;
+}
+
+/* Mobile touch optimization */
+@media (hover: none) and (pointer: coarse) {
+  .glass-button:hover, .boraq-button:hover {
+    transform: none;
+  }
+
+  .glass-button:active, .boraq-button:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Boraq brand gradient border effect */
+.boraq-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.boraq-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--boraq-soft-green), var(--boraq-mint-green), var(--boraq-dark-green), var(--boraq-deep-green), var(--boraq-soft-green));
+  background-size: 400% 400%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: boraq-flow 3s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+@keyframes boraq-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
